@@ -35,7 +35,7 @@ CustomFlyViewOptions::CustomFlyViewOptions(CustomOptions* options, QObject* pare
 // This custom build does not support conecting multiple vehicles to it. This in turn simplifies various parts of the QGC ui.
 bool CustomFlyViewOptions::showMultiVehicleList(void) const
 {
-    return false;
+    return true;
 }
 
 // This custom build has it's own custom instrument panel. Don't show regular one.
