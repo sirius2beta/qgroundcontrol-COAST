@@ -65,7 +65,7 @@ Item {
         id:                         compassBar
         height:                     ScreenTools.defaultFontPixelHeight * 1.5
         width:                      ScreenTools.defaultFontPixelWidth  * 50
-        color:                      "#DEDEDE"
+        color:                      "#555555"
         radius:                     2
         clip:                       true
         anchors.top:                headingIndicator.bottom
@@ -84,7 +84,7 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter
                 x:              visible ? ((modelData * (compassBar.width / 360)) - (width * 0.5)) : 0
                 visible:        _angle % 45 == 0
-                color:          "#75505565"
+                color:          "#DDDDDD"
                 font.pointSize: ScreenTools.smallFontPointSize
                 text: {
                     switch(_angle) {
