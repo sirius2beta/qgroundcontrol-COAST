@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  *
  * (c) 2009-2019 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -41,7 +41,7 @@ bool CustomFlyViewOptions::showMultiVehicleList(void) const
 // This custom build has it's own custom instrument panel. Don't show regular one.
 bool CustomFlyViewOptions::showInstrumentPanel(void) const
 {
-    return false;
+    return true;
 }
 
 CustomOptions::CustomOptions(CustomPlugin*, QObject* parent)
@@ -75,7 +75,7 @@ CustomPlugin::CustomPlugin(QGCApplication *app, QGCToolbox* toolbox)
     : QGCCorePlugin(app, toolbox)
 {
     _options = new CustomOptions(this, this);
-    _showAdvancedUI = false;
+    _showAdvancedUI = true;
 }
 
 CustomPlugin::~CustomPlugin()

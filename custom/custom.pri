@@ -58,13 +58,16 @@ QML_IMPORT_PATH += \
 
 # Our own, custom sources
 SOURCES += \
+    $$PWD/src/AutoConnectTool/autoconnecttool.cpp \
     $$PWD/src/CustomPlugin.cc \
 
 HEADERS += \
+    $$PWD/src/AutoConnectTool/autoconnecttool.h \
     $$PWD/src/CustomPlugin.h \
 
 INCLUDEPATH += \
     $$PWD/src \
+    $$PWD/src/AutoConnectTool \
 
 #-------------------------------------------------------------------------------------
 # Custom Firmware/AutoPilot Plugin

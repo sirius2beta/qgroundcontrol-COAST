@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  *
  * (c) 2009-2019 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -15,6 +15,7 @@
 #include "QGCOptions.h"
 #include "QGCLoggingCategory.h"
 #include "SettingsManager.h"
+#include "AutoConnectTool.h"
 
 #include <QTranslator>
 
@@ -48,7 +49,7 @@ private:
     CustomFlyViewOptions* _flyViewOptions = nullptr;
 };
 
-class CustomPlugin : public QGCCorePlugin
+class CustomPlugin : public QGCCorePlugin   
 {
     Q_OBJECT
 public:
