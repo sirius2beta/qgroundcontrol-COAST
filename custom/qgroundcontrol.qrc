@@ -213,7 +213,6 @@
         <file alias="QGroundControl/FlightDisplay/FlyViewPreFlightChecklistPopup.qml">../src/FlightDisplay/FlyViewPreFlightChecklistPopup.qml</file>
         <file alias="QGroundControl/FlightDisplay/FlyViewToolStrip.qml">../src/FlightDisplay/FlyViewToolStrip.qml</file>
         <file alias="QGroundControl/FlightDisplay/FlyViewVideo.qml">../src/FlightDisplay/FlyViewVideo.qml</file>
-        <file alias="QGroundControl/FlightDisplay/FlyViewWidgetLayer.qml">../src/FlightDisplay/FlyViewWidgetLayer.qml</file>
         <file alias="QGroundControl/FlightDisplay/GuidedActionActionList.qml">../src/FlightDisplay/GuidedActionActionList.qml</file>
         <file alias="QGroundControl/FlightDisplay/GuidedActionConfirm.qml">../src/FlightDisplay/GuidedActionConfirm.qml</file>
         <file alias="QGroundControl/FlightDisplay/GuidedActionsController.qml">../src/FlightDisplay/GuidedActionsController.qml</file>
@@ -287,6 +286,7 @@
         <file alias="VTOLLandingPatternEditor.qml">../src/PlanView/VTOLLandingPatternEditor.qml</file>
         <file alias="QGroundControl/Controls/MockLinkOptionsDlg.qml">../src/comm/MockLinkOptionsDlg.qml</file>
         <file alias="ToolSelectionPad.qml">res/ToolSelectionPad.qml</file>
+        <file alias="QGroundControl/FlightDisplay/FlyViewWidgetLayer.qml">res/CustomFlyViewWidgetLayer.qml</file>
     </qresource>
     <qresource prefix="/FirstRunPromptDialogs">
         <file alias="UnitsFirstRunPrompt.qml">../src/FirstRunPromptDialogs/UnitsFirstRunPrompt.qml</file>

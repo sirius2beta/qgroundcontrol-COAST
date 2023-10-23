@@ -26,7 +26,7 @@ ToolStripActionList {
             text:           qsTr("Plan")
             iconSource:     "/qmlimages/Plan.svg"
             onTriggered:    {
-                mainWindow.flightView.customOverlay.visible = false
+                parent.myCube.visible?(parent.myCube.visible = false):(parent.myCube.visible = true)
 
             }
 

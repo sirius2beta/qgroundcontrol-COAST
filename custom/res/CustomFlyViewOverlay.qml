@@ -56,14 +56,7 @@ Item {
     QGCToolInsets {
         id:                     _totalToolInsets
     }
-    Rectangle {
-        x:100
-        y:600
-        width:100
-        height:100
-        color: "blue"
-        visible: true
-    }
+
 
 
     //-------------------------------------------------------------------------
