@@ -66,7 +66,14 @@ Item {
         bottomEdgeCenterInset:  mapScale.centerInset
         bottomEdgeRightInset:   0
     }
-    AutoConnectUI{ id:my_cube }
+    AutoConnectUI   {
+        id:my_cube
+        anchors.top: toolStrip.bottom
+        anchors.left: toolStrip.left
+        color: qgcPal.windowShadeDark
+        anchors.margins: 10
+
+    }
 
     FlyViewMissionCompleteDialog {
         missionController:      _missionController
