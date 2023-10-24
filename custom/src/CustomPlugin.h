@@ -15,7 +15,7 @@
 #include "QGCOptions.h"
 #include "QGCLoggingCategory.h"
 #include "SettingsManager.h"
-#include "AutoConnectTool.h"
+#include "autoconnecttool.h"
 
 #include <QTranslator>
 
