@@ -28,6 +28,8 @@ import QGroundControl.Palette       1.0
 import QGroundControl.ScreenTools   1.0
 import QGroundControl.Vehicle       1.0
 
+import Rockit.Controls  1.0
+
 // This is the ui overlay layer for the widgets/tools for Fly View
 Item {
     id: _root
@@ -64,21 +66,14 @@ Item {
         bottomEdgeCenterInset:  mapScale.centerInset
         bottomEdgeRightInset:   0
     }
+    AutoConnectUI{ id:my_cube }
 
     FlyViewMissionCompleteDialog {
         missionController:      _missionController
         geoFenceController:     _geoFenceController
         rallyPointController:   _rallyPointController
     }
-    Rectangle {
-        id: my_cube
-        x:20
-        y:600
-        width:300
-        height:100
-        color: "black"
-        visible: true
-    }
+
     Row {
         id:                 multiVehiclePanelSelector
         anchors.margins:    _toolsMargin
