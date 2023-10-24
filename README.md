@@ -2,10 +2,7 @@
 
 [![Releases](https://img.shields.io/github/release/mavlink/QGroundControl.svg)](https://github.com/mavlink/QGroundControl/releases)
 
-NPU Rockfish USV program custom qgroundcontrol build
-```
-git clone --recursive -j8 
-```
+
 
 *QGroundControl* (QGC) is an intuitive and powerful ground control station (GCS) for UAVs.
 
@@ -15,6 +12,10 @@ It provides full flight control and mission planning for any MAVLink enabled dro
 All the code is open-source, so you can contribute and evolve it as you want.
 The [Developer Guide](https://dev.qgroundcontrol.com/en/) explains how to [build](https://dev.qgroundcontrol.com/en/getting_started/) and extend QGC.
 
+NPU Rockfish USV program custom qgroundcontrol build
+```
+git clone --recursive -j8 
+```
 
 Key Links:
 * [Website](http://qgroundcontrol.com) (qgroundcontrol.com)
