@@ -23,7 +23,7 @@ ToolStripActionList {
             onTriggered:    mainWindow.showPlanView()
         },
         ToolStripAction {
-            text:           qsTr("Plan")
+            text:           qsTr("AutoConn")
             iconSource:     "/qmlimages/Plan.svg"
             onTriggered:    {
                 parent.myCube.visible?(parent.myCube.visible = false):(parent.myCube.visible = true)

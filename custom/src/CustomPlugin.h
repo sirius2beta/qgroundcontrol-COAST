@@ -78,4 +78,7 @@ private:
 private:
     CustomOptions*  _options = nullptr;
     QVariantList    _customSettingsList; // Not to be mixed up with QGCCorePlugin implementation
+    AutoConnectTool* _autoConnectTool;
+
+
 };
