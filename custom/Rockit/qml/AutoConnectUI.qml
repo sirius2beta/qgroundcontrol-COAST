@@ -10,6 +10,7 @@ Rectangle {
     width:300
     height:100
     visible: true
+    radius: 5
 
     Rectangle{
         id:boxTitle
@@ -18,6 +19,15 @@ Rectangle {
         anchors.right: parent.right
         anchors.left: parent.left
         color: "#555555"
+        radius: 5
+        Rectangle{
+            anchors.bottom: boxTitle.bottom
+            anchors.left: boxTitle.bottom
+            width: boxTitle.width
+            height:5
+            color: "#555555"
+        }
+
         QGCLabel{
             text: qsTr("AutoConnectTool")
             anchors.verticalCenter: boxTitle.verticalCenter
@@ -44,6 +54,8 @@ Rectangle {
         anchors.topMargin: 10
         anchors.verticalCenter: ipLabel.verticalCenter
         KeyNavigation.tab: connectButton
+        text: Rockit.targetIP
+
 
     }
 
@@ -55,5 +67,9 @@ Rectangle {
         anchors.topMargin: 10
         text:               qsTr("Connect")
         activeFocusOnTab: true
+        onClicked: {
+            Rockit.targetIP = ipField.text
+            Rockit.connect()
+        }
     }
 }

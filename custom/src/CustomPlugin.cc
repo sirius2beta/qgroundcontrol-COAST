@@ -369,7 +369,7 @@ void CustomPlugin::paletteOverride(QString colorName, QGCPalette::PaletteColorIn
 QQmlApplicationEngine* CustomPlugin::createQmlApplicationEngine(QObject* parent)
 {
     QQmlApplicationEngine* qmlEngine = QGCCorePlugin::createQmlApplicationEngine(parent);
-    qmlRegisterSingletonType<AutoConnectTool> ("Rockit", 1, 0, "AutoConnectTool",  autoConnectToolSingletonFactory);
+    qmlRegisterSingletonType<AutoConnectTool> ("Rockit", 1, 0, "Rockit",  autoConnectToolSingletonFactory);
 
     qmlEngine->addImportPath("qrc:/Custom/Widgets");
     qmlEngine->addImportPath("qrc:/Rockit/Controls");

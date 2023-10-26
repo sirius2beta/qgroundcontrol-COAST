@@ -23,3 +23,7 @@ void AutoConnectTool::setTargetIP(QString ip)
 {
     _targetIP = ip;
 }
+
+void AutoConnectTool::connect(){
+    qDebug()<<"AutoConnectTool::connect:"<<_targetIP;
+}
