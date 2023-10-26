@@ -1,4 +1,4 @@
-import QtQuick                  2.3
+﻿import QtQuick                  2.3
 import QtQuick.Controls         1.2
 import QtQuick.Controls.Styles  1.4
 import QtQuick.Layouts          1.2
@@ -57,7 +57,7 @@ TextField {
         font.pointSize: ScreenTools.defaultFontPointSize
         font.family:    ScreenTools.normalFontFamily
         renderType:     ScreenTools.isWindows ? Text.QtRendering : tfs.renderType   // This works around font rendering problems on windows
-
+        placeholderTextColor: "#777777"
         background: Item {
             id: backgroundItem
 

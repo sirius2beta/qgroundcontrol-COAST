@@ -34,5 +34,6 @@
         <file alias="QGroundControl/FlightDisplay/FlyViewWidgetLayer.qml">res/CustomFlyViewWidgetLayer.qml</file>
         <file alias="Rockit/Controls/AutoConnectUI.qml">Rockit/qml/AutoConnectUI.qml</file>
         <file alias="Rockit/Controls/qmldir">Rockit/qml/qmldir</file>
+        <file alias="LinkSettings.qml">res/LinkSettings.qml</file>
     </qresource>
 </RCC>

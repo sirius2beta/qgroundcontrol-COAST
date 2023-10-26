@@ -38,10 +38,12 @@ Rectangle {
         settingsLoader.originalLinkConfig = originalLinkConfig
         if (originalLinkConfig) {
             // Editing existing link config
-            settingsLoader.editingConfig = QGroundControl.linkManager.startConfigurationEditing(originalLinkConfig)
+            settingsLoader.editingConfigPrimary = QGroundControl.linkManager.startConfigurationEditing(originalLinkConfig)
+            //settingsLoader.editingConfigSecondary = QGroundControl.linkManager.startConfigurationEditing(originalLinkConfig)
         } else {
             // Create new link configuration
-            settingsLoader.editingConfig = QGroundControl.linkManager.createConfiguration(ScreenTools.isSerialAvailable ? LinkConfiguration.TypeSerial : LinkConfiguration.TypeUdp, "")
+            settingsLoader.editingConfigPrimary = QGroundControl.linkManager.createConfiguration(ScreenTools.isSerialAvailable && QGroundControl.corePlugin.showAdvancedUI ? LinkConfiguration.TypeSerial : LinkConfiguration.TypeUdp, "")
+            //settingsLoader.editingConfigSecondary = QGroundControl.linkManager.createConfiguration(ScreenTools.isSerialAvailable ? LinkConfiguration.TypeSerial : LinkConfiguration.TypeUdp, "")
         }
         settingsLoader.sourceComponent = commSettings
     }
@@ -49,7 +51,7 @@ Rectangle {
     Component.onDestruction: {
         if (settingsLoader.sourceComponent) {
             settingsLoader.sourceComponent = null
-            QGroundControl.linkManager.cancelConfigurationEditing(settingsLoader.editingConfig)
+            QGroundControl.linkManager.cancelConfigurationEditing(settingsLoader.editingConfigPrimary)
         }
     }
 
@@ -153,7 +155,8 @@ Rectangle {
         visible:        sourceComponent ? true : false
 
         property var originalLinkConfig:    null
-        property var editingConfig:      null
+        property var editingConfigPrimary:      null
+        property var editingConfigSecondary:      null
     }
 
     //---------------------------------------------
@@ -194,38 +197,38 @@ Rectangle {
                                     id:                     nameField
                                     Layout.preferredWidth:  _secondColumnWidth
                                     Layout.fillWidth:       true
-                                    text:                   editingConfig.name
+                                    text:                   editingConfigPrimary.name
                                     placeholderText:        qsTr("Enter name")
                                 }
 
                                 QGCCheckBox {
                                     Layout.columnSpan:  2
                                     text:               qsTr("Automatically Connect on Start")
-                                    checked:            editingConfig.autoConnect
-                                    onCheckedChanged:   editingConfig.autoConnect = checked
+                                    checked:            editingConfigPrimary.autoConnect
+                                    onCheckedChanged:   editingConfigPrimary.autoConnect = checked
                                 }
 
                                 QGCCheckBox {
                                     Layout.columnSpan:  2
                                     text:               qsTr("High Latency")
-                                    checked:            editingConfig.highLatency
-                                    onCheckedChanged:   editingConfig.highLatency = checked
+                                    checked:            editingConfigPrimary.highLatency
+                                    onCheckedChanged:   editingConfigPrimary.highLatency = checked
                                 }
 
                                 QGCLabel { text: qsTr("Type") }
                                 QGCComboBox {
                                     Layout.preferredWidth:  _secondColumnWidth
                                     Layout.fillWidth:       true
-                                    enabled:                originalLinkConfig == null
+                                    enabled:                QGroundControl.corePlugin.showAdvancedUI?false:true
                                     model:                  QGroundControl.linkManager.linkTypeStrings
-                                    currentIndex:           editingConfig.linkType
+                                    currentIndex:           QGroundControl.corePlugin.showAdvancedUI?1:editingConfig.linkType //restricted to udp connection
 
                                     onActivated: {
                                         if (index !== editingConfig.linkType) {
                                             // Save current name
                                             var name = nameField.text
                                             // Create new link configuration
-                                            editingConfig = QGroundControl.linkManager.createConfiguration(index, name)
+                                            editingConfigPrimary = QGroundControl.linkManager.createConfiguration(index, name)
                                         }
                                     }
                                 }
@@ -235,7 +238,7 @@ Rectangle {
                                 id:     linksettingsLoader
                                 source: subEditConfig.settingsURL
 
-                                property var subEditConfig: editingConfig
+                                property var subEditConfig: editingConfigPrimary
                             }
                         }
                     }
@@ -252,14 +255,14 @@ Rectangle {
                             onClicked: {
                                 // Save editing
                                 linksettingsLoader.item.saveSettings()
-                                editingConfig.name = nameField.text
+                                editingConfigPrimary.name = nameField.text
                                 settingsLoader.sourceComponent = null
                                 if (originalLinkConfig) {
-                                    QGroundControl.linkManager.endConfigurationEditing(originalLinkConfig, editingConfig)
+                                    QGroundControl.linkManager.endConfigurationEditing(originalLinkConfig, editingConfigPrimary)
                                 } else {
                                     // If it was edited, it's no longer "dynamic"
-                                    editingConfig.dynamic = false
-                                    QGroundControl.linkManager.endCreateConfiguration(editingConfig)
+                                    editingConfigPrimary.dynamic = false
+                                    QGroundControl.linkManager.endCreateConfiguration(editingConfigPrimary)
                                 }
                             }
                         }
@@ -269,7 +272,7 @@ Rectangle {
                             text:       qsTr("Cancel")
                             onClicked: {
                                 settingsLoader.sourceComponent = null
-                                QGroundControl.linkManager.cancelConfigurationEditing(settingsLoader.editingConfig)
+                                QGroundControl.linkManager.cancelConfigurationEditing(settingsLoader.editingConfigPrimary)
                             }
                         }
                     }

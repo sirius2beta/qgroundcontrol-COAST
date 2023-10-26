@@ -22,7 +22,7 @@ Rectangle {
         radius: 5
         Rectangle{
             anchors.bottom: boxTitle.bottom
-            anchors.left: boxTitle.bottom
+            anchors.left: boxTitle.left
             width: boxTitle.width
             height:5
             color: "#555555"
