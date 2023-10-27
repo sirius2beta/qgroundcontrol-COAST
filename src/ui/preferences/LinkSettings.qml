@@ -273,6 +273,7 @@ Rectangle {
                             onClicked: {
                                 settingsLoader.sourceComponent = null
                                 QGroundControl.linkManager.cancelConfigurationEditing(settingsLoader.editingConfig)
+                                Rockit.addLink(editingConfig,"192.168.0.1")
                             }
                         }
                     }

@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  *
  * (c) 2009-2020 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -17,6 +17,12 @@ import QGroundControl.ScreenTools   1.0
 import QGroundControl.Palette       1.0
 
 ColumnLayout {
+    id: _root
+    //property string targetIP
+    function setIP(ip) {
+        vehicleField.text = ip
+    }
+
     spacing: _rowSpacing
 
     function saveSettings() {
@@ -45,6 +51,16 @@ ColumnLayout {
         }
     }
 
+    QGCLabel { text: qsTr("Target vehicle IP") }
+    QGCTextField {
+        id:                     vehicleField
+        text: targetIP
+        Layout.preferredWidth:  _secondColumnWidth
+        placeholderText:        qsTr("Example: 127.0.0.1:14550")
+        onEditingFinished: targetIP = text
+    }
+
+/*
     QGCLabel { text: qsTr("Server Addresses (optional)") }
 
     Repeater {
@@ -82,4 +98,5 @@ ColumnLayout {
             }
         }
     }
+*/
 }

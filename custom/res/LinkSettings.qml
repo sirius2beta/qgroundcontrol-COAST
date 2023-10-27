@@ -17,6 +17,8 @@ import QGroundControl.Controls      1.0
 import QGroundControl.ScreenTools   1.0
 import QGroundControl.Palette       1.0
 
+import Rockit   1.0
+
 Rectangle {
     id:                 _linkRoot
     color:              qgcPal.window
@@ -42,7 +44,7 @@ Rectangle {
             //settingsLoader.editingConfigSecondary = QGroundControl.linkManager.startConfigurationEditing(originalLinkConfig)
         } else {
             // Create new link configuration
-            settingsLoader.editingConfigPrimary = QGroundControl.linkManager.createConfiguration(ScreenTools.isSerialAvailable && QGroundControl.corePlugin.showAdvancedUI ? LinkConfiguration.TypeSerial : LinkConfiguration.TypeUdp, "")
+            settingsLoader.editingConfigPrimary = QGroundControl.linkManager.createConfiguration(LinkConfiguration.TypeUdp, "")
             //settingsLoader.editingConfigSecondary = QGroundControl.linkManager.createConfiguration(ScreenTools.isSerialAvailable ? LinkConfiguration.TypeSerial : LinkConfiguration.TypeUdp, "")
         }
         settingsLoader.sourceComponent = commSettings
@@ -108,6 +110,7 @@ Rectangle {
                 text:       _currentSelection ? qsTr("Remove %1. Is this really what you want?").arg(_currentSelection.name) : ""
 
                 onYes: {
+                    Rockit.deleteLink(_currentSelection)
                     QGroundControl.linkManager.removeConfiguration(_currentSelection)
                     _currentSelection = null
                     deleteDialog.visible = false
@@ -219,12 +222,12 @@ Rectangle {
                                 QGCComboBox {
                                     Layout.preferredWidth:  _secondColumnWidth
                                     Layout.fillWidth:       true
-                                    enabled:                QGroundControl.corePlugin.showAdvancedUI?false:true
+                                    enabled:                QGroundControl.corePlugin.showAdvancedUI && (originalLinkConfig == null)?true:false
                                     model:                  QGroundControl.linkManager.linkTypeStrings
-                                    currentIndex:           QGroundControl.corePlugin.showAdvancedUI?1:editingConfig.linkType //restricted to udp connection
+                                    currentIndex:           editingConfigPrimary.linkType //restricted to udp connection
 
                                     onActivated: {
-                                        if (index !== editingConfig.linkType) {
+                                        if (index !== editingConfigPrimary.linkType) {
                                             // Save current name
                                             var name = nameField.text
                                             // Create new link configuration
@@ -239,6 +242,10 @@ Rectangle {
                                 source: subEditConfig.settingsURL
 
                                 property var subEditConfig: editingConfigPrimary
+                                property var originalConf: originalLinkConfig
+                                property string targetIP:Rockit.getIP(originalLinkConfig)
+
+
                             }
                         }
                     }
@@ -258,11 +265,16 @@ Rectangle {
                                 editingConfigPrimary.name = nameField.text
                                 settingsLoader.sourceComponent = null
                                 if (originalLinkConfig) {
+                                    Rockit.editLink(originalLinkConfig,linksettingsLoader.targetIP)
                                     QGroundControl.linkManager.endConfigurationEditing(originalLinkConfig, editingConfigPrimary)
+
                                 } else {
                                     // If it was edited, it's no longer "dynamic"
                                     editingConfigPrimary.dynamic = false
                                     QGroundControl.linkManager.endCreateConfiguration(editingConfigPrimary)
+                                    if(editingConfigPrimary.linkType === LinkConfiguration.TypeUdp){
+                                            Rockit.addLink(editingConfigPrimary,linksettingsLoader.targetIP)
+                                    }
                                 }
                             }
                         }
@@ -273,6 +285,7 @@ Rectangle {
                             onClicked: {
                                 settingsLoader.sourceComponent = null
                                 QGroundControl.linkManager.cancelConfigurationEditing(settingsLoader.editingConfigPrimary)
+
                             }
                         }
                     }
