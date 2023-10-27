@@ -17,6 +17,8 @@ import QGroundControl.Controls      1.0
 import QGroundControl.ScreenTools   1.0
 import QGroundControl.Palette       1.0
 
+import Rockit   1.0
+
 Rectangle {
     id:                 _linkRoot
     color:              qgcPal.window
@@ -260,6 +262,7 @@ Rectangle {
                                     // If it was edited, it's no longer "dynamic"
                                     editingConfig.dynamic = false
                                     QGroundControl.linkManager.endCreateConfiguration(editingConfig)
+                                    Rockit.addLink(editingConfig,"192.168.0.1")
                                 }
                             }
                         }

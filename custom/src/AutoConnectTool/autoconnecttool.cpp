@@ -14,35 +14,41 @@ AutoConnectTool::~AutoConnectTool()
 
 }
 
-bool AutoConnectTool::addLink(SharedLinkInterfacePtr link, QString ip)
+bool AutoConnectTool::addLink(LinkConfiguration* link, QString ip)
 {
-    if(!_linkList.contains(link)){
-        _linkList.insert(link, ip);
+    if(!_linkList.contains(link->link())){
+        _linkList.insert(link->link(), ip);
         qDebug()<<"AutoConnectTool::addLink, IP:"<<ip;
     }else{
         return false;
     }
     return true;
+
 }
 
-bool AutoConnectTool::deleteLink(SharedLinkInterfacePtr link)
+bool AutoConnectTool::deleteLink(LinkConfiguration* link)
 {
+    /*
     if(!_linkList.contains(link)){
         _linkList.remove(link);
         qDebug()<<"AutoConnectTool::deleteLink";
     }else{
         return false;
     }
+*/
     return true;
 }
 
-bool AutoConnectTool::editLink(SharedLinkInterfacePtr link, QString ip)
+bool AutoConnectTool::editLink(LinkConfiguration* link, QString ip)
 {
+    /*
+
     if(!_linkList.contains(link)){
         _linkList[link] = ip;
     }else{
         return false;
     }
+    */
     return true;
 }
 

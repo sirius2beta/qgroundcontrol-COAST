@@ -15,9 +15,9 @@ public:
     Q_PROPERTY(QString targetIP READ targetIP WRITE setTargetIP NOTIFY targetIPChanged)
 
     Q_INVOKABLE void connect();
-    Q_INVOKABLE bool addLink(SharedLinkInterfacePtr link, QString ip);
-    Q_INVOKABLE bool deleteLink(SharedLinkInterfacePtr link);
-    Q_INVOKABLE bool editLink(SharedLinkInterfacePtr link, QString ip);
+    Q_INVOKABLE bool addLink(LinkConfiguration* link, QString ip);
+    Q_INVOKABLE bool deleteLink(LinkConfiguration* link);
+    Q_INVOKABLE bool editLink(LinkConfiguration* link, QString ip);
 
     explicit AutoConnectTool(QObject *parent = nullptr);
     ~AutoConnectTool();
@@ -29,7 +29,7 @@ signals:
 private:
     QString _targetIP;
     QGCToolbox* _toolbox;
-    QMap<SharedLinkInterfacePtr, QString> _linkList;
+    QMap<LinkInterface*, QString> _linkList;
 
 };
 
