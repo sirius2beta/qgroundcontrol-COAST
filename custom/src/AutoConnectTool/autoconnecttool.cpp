@@ -14,14 +14,48 @@ AutoConnectTool::~AutoConnectTool()
 
 }
 
-QString AutoConnectTool::targetIP()
+bool AutoConnectTool::addLink(LinkConfiguration* link, QString ip)
 {
-    return _targetIP;
+    if(!_linkList.contains(link->link())){
+        _linkList.insert(link->link(), ip);
+        qDebug()<<"AutoConnectTool::addLink, IP:"<<ip;
+    }else{
+        return false;
+    }
+    return true;
+
+}
+
+bool AutoConnectTool::deleteLink(LinkConfiguration* link)
+{
+    /*
+    if(!_linkList.contains(link)){
+        _linkList.remove(link);
+        qDebug()<<"AutoConnectTool::deleteLink";
+    }else{
+        return false;
+    }
+*/
+    return true;
+}
+
+bool AutoConnectTool::editLink(LinkConfiguration* link, QString ip)
+{
+    /*
+
+    if(!_linkList.contains(link)){
+        _linkList[link] = ip;
+    }else{
+        return false;
+    }
+    */
+    return true;
 }
 
 void AutoConnectTool::setTargetIP(QString ip)
 {
     _targetIP = ip;
+    emit targetIPChanged(ip);
 }
 
 void AutoConnectTool::connect(){
