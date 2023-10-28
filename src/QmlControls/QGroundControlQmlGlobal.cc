@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  *
  * (c) 2009-2020 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -79,6 +79,7 @@ void QGroundControlQmlGlobal::setToolbox(QGCToolbox* toolbox)
     _gpsRtkFactGroup        = qgcApp()->gpsRtkFactGroup();
     _adsbVehicleManager     = toolbox->adsbVehicleManager();
     _globalPalette          = new QGCPalette(this);
+    _autoConnectTool        = toolbox->autoConnectTool();
 #if defined(QGC_ENABLE_PAIRING)
     _pairingManager         = toolbox->pairingManager();
 #endif

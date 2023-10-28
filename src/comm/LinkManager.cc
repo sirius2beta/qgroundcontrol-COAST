@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  *
  * (c) 2009-2020 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -363,6 +363,7 @@ void LinkManager::loadLinkConfigurationList()
 
     // Enable automatic Serial PX4/3DR Radio hunting
     _configurationsLoaded = true;
+    qDebug()<<"+++++++++++++++++++=========================";
 }
 
 #ifndef NO_SERIAL_LINK

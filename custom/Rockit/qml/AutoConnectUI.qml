@@ -1,5 +1,6 @@
 ﻿import QtQuick 2.15
 
+import QGroundControl   1.0
 import QGroundControl.Controls  1.0
 import QGroundControl.ScreenTools   1.0
 import Rockit 1.0
@@ -54,7 +55,7 @@ Rectangle {
         anchors.topMargin: 10
         anchors.verticalCenter: ipLabel.verticalCenter
         KeyNavigation.tab: connectButton
-        text: Rockit.targetIP
+        text: QGroundControl.autoConnectTool.targetIP
 
 
     }
@@ -68,8 +69,7 @@ Rectangle {
         text:               qsTr("Connect")
         activeFocusOnTab: true
         onClicked: {
-            Rockit.targetIP = ipField.text
-            Rockit.connect()
+            QGroundControl.autoConnectTool.targetIP = ipField.text
         }
     }
 }

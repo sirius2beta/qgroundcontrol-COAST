@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  *
  * (c) 2009-2020 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -79,6 +79,7 @@ public:
     bool isBluetoothAvailable       (void);
 
     QList<SharedLinkInterfacePtr>   links                           (void) { return _rgLinks; }
+    QList<SharedLinkConfigurationPtr>   configs                           (void) { return _rgLinkConfigs; }
     QStringList                     linkTypeStrings                 (void) const;
     QStringList                     serialBaudRates                 (void);
     QStringList                     serialPortStrings               (void);

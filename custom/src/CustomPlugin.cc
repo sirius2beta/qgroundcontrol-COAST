@@ -16,13 +16,7 @@
 
 QGC_LOGGING_CATEGORY(CustomLog, "CustomLog")
 
-static QObject* autoConnectToolSingletonFactory(QQmlEngine*, QJSEngine*)
-{
-    // We create this object as a QGCTool even though it isn't in the toolbox
-    AutoConnectTool* _autoConnectTool = new AutoConnectTool(qgcApp());
 
-    return _autoConnectTool;
-}
 
 CustomFlyViewOptions::CustomFlyViewOptions(CustomOptions* options, QObject* parent)
     : QGCFlyViewOptions(options, parent)
@@ -369,7 +363,6 @@ void CustomPlugin::paletteOverride(QString colorName, QGCPalette::PaletteColorIn
 QQmlApplicationEngine* CustomPlugin::createQmlApplicationEngine(QObject* parent)
 {
     QQmlApplicationEngine* qmlEngine = QGCCorePlugin::createQmlApplicationEngine(parent);
-    qmlRegisterSingletonType<AutoConnectTool> ("Rockit", 1, 0, "Rockit",  autoConnectToolSingletonFactory);
 
     qmlEngine->addImportPath("qrc:/Custom/Widgets");
     qmlEngine->addImportPath("qrc:/Rockit/Controls");

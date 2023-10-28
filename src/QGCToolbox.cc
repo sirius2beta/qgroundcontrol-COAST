@@ -1,4 +1,4 @@
- /****************************************************************************
+﻿ /****************************************************************************
  *
  * (c) 2009-2020 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -31,6 +31,9 @@
 #include "SettingsManager.h"
 #include "QGCApplication.h"
 #include "ADSBVehicleManager.h"
+
+#include "autoconnecttool.h"
+
 #if defined(QGC_ENABLE_PAIRING)
 #include "PairingManager.h"
 #endif
@@ -44,6 +47,8 @@
 #if defined(QGC_CUSTOM_BUILD)
 #include CUSTOMHEADER
 #endif
+
+
 
 QGCToolbox::QGCToolbox(QGCApplication* app)
 {
@@ -70,6 +75,8 @@ QGCToolbox::QGCToolbox(QGCApplication* app)
     _videoManager           = new VideoManager              (app, this);
     _mavlinkLogManager      = new MAVLinkLogManager         (app, this);
     _adsbVehicleManager     = new ADSBVehicleManager        (app, this);
+
+    _autoConnectTool        = new AutoConnectTool           (app, this);  //Custom class
 #if defined(QGC_ENABLE_PAIRING)
     _pairingManager         = new PairingManager            (app, this);
 #endif
@@ -106,6 +113,8 @@ void QGCToolbox::setChildToolboxes(void)
     _videoManager->setToolbox(this);
     _mavlinkLogManager->setToolbox(this);
     _adsbVehicleManager->setToolbox(this);
+
+    _autoConnectTool->setToolbox(this);
 #if defined(QGC_GST_TAISYNC_ENABLED)
     _taisyncManager->setToolbox(this);
 #endif

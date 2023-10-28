@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  *
  * (c) 2009-2020 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -18,6 +18,8 @@
 #include "ADSBVehicleManager.h"
 #include "QGCPalette.h"
 #include "QmlUnitsConversion.h"
+
+#include "autoconnecttool.h"
 #if defined(QGC_ENABLE_PAIRING)
 #include "PairingManager.h"
 #endif
@@ -111,6 +113,7 @@ public:
     Q_PROPERTY(QString  elevationProviderName           READ elevationProviderName              CONSTANT)
     Q_PROPERTY(QString  elevationProviderNotice         READ elevationProviderNotice            CONSTANT)
 
+    Q_PROPERTY(AutoConnectTool*         autoConnectTool             READ    autoConnectTool             CONSTANT)
 
 #if defined(QGC_ENABLE_PAIRING)
     Q_PROPERTY(PairingManager*      pairingManager          READ pairingManager         CONSTANT)
@@ -181,6 +184,9 @@ public:
 #endif
 
     MicrohardManager*       microhardManager    () { return _microhardManager; }
+    AutoConnectTool*        autoConnectTool     () { return _autoConnectTool; }
+
+
 #if defined(QGC_GST_TAISYNC_ENABLED)
     bool                    microhardSupported  () { return true; }
 #else
@@ -259,6 +265,7 @@ private:
     ADSBVehicleManager*     _adsbVehicleManager     = nullptr;
     QGCPalette*             _globalPalette          = nullptr;
     QmlUnitsConversion      _unitsConversion;
+    AutoConnectTool*        _autoConnectTool        = nullptr;
 #if defined(QGC_ENABLE_PAIRING)
     PairingManager*         _pairingManager         = nullptr;
 #endif

@@ -110,7 +110,7 @@ Rectangle {
                 text:       _currentSelection ? qsTr("Remove %1. Is this really what you want?").arg(_currentSelection.name) : ""
 
                 onYes: {
-                    Rockit.deleteLink(_currentSelection)
+                    QGroundControl.autoConnectTool.deleteLink(_currentSelection)
                     QGroundControl.linkManager.removeConfiguration(_currentSelection)
                     _currentSelection = null
                     deleteDialog.visible = false
@@ -243,7 +243,7 @@ Rectangle {
 
                                 property var subEditConfig: editingConfigPrimary
                                 property var originalConf: originalLinkConfig
-                                property string targetIP:Rockit.getIP(originalLinkConfig)
+                                property string targetIP:QGroundControl.autoConnectTool.getIP(originalLinkConfig)
 
 
                             }
@@ -265,15 +265,16 @@ Rectangle {
                                 editingConfigPrimary.name = nameField.text
                                 settingsLoader.sourceComponent = null
                                 if (originalLinkConfig) {
-                                    Rockit.editLink(originalLinkConfig,linksettingsLoader.targetIP)
+
                                     QGroundControl.linkManager.endConfigurationEditing(originalLinkConfig, editingConfigPrimary)
+                                    QGroundControl.autoConnectTool.editLink(originalLinkConfig,linksettingsLoader.targetIP)
 
                                 } else {
                                     // If it was edited, it's no longer "dynamic"
                                     editingConfigPrimary.dynamic = false
                                     QGroundControl.linkManager.endCreateConfiguration(editingConfigPrimary)
                                     if(editingConfigPrimary.linkType === LinkConfiguration.TypeUdp){
-                                            Rockit.addLink(editingConfigPrimary,linksettingsLoader.targetIP)
+                                            QGroundControl.autoConnectTool.addLink(editingConfigPrimary,linksettingsLoader.targetIP)
                                     }
                                 }
                             }

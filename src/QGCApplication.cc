@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  *
  * (c) 2009-2020 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -106,6 +106,8 @@
 #include "CustomAction.h"
 #include "CustomActionManager.h"
 
+#include "autoconnecttool.h"
+
 #if defined(QGC_ENABLE_PAIRING)
 #include "PairingManager.h"
 #endif
@@ -165,6 +167,14 @@ static QObject* screenToolsControllerSingletonFactory(QQmlEngine*, QJSEngine*)
 {
     ScreenToolsController* screenToolsController = new ScreenToolsController;
     return screenToolsController;
+}
+
+static QObject* autoConnectToolSingletonFactory(QQmlEngine*, QJSEngine*)
+{
+    // We create this object as a QGCTool even though it isn't in the toolbox
+    AutoConnectTool* _autoConnectTool = new AutoConnectTool(qgcApp(),qgcApp()->toolbox());
+
+    return _autoConnectTool;
 }
 
 static QObject* mavlinkSingletonFactory(QQmlEngine*, QJSEngine*)
@@ -539,6 +549,10 @@ void QGCApplication::_initCommon()
     qmlRegisterSingletonType<ShapeFileHelper>           ("QGroundControl.ShapeFileHelper",          1, 0, "ShapeFileHelper",        shapeFileHelperSingletonFactory);
     qmlRegisterSingletonType<ShapeFileHelper>           ("MAVLink",                                 1, 0, "MAVLink",                mavlinkSingletonFactory);
 
+    //qmlRegisterSingletonType<AutoConnectTool> ("Rockit", 1, 0, "Rockit",  autoConnectToolSingletonFactory);
+    qmlRegisterUncreatableType<AutoConnectTool>           ("Rockit",                       1, 0, "Rockit",              kRefOnly);
+
+
     // Although this should really be in _initForNormalAppBoot putting it here allowws us to create unit tests which pop up more easily
     if(QFontDatabase::addApplicationFont(":/fonts/opensans") < 0) {
         qWarning() << "Could not load /fonts/opensans font";
@@ -578,6 +592,9 @@ bool QGCApplication::_initForNormalAppBoot()
 
     // Load known link configurations
     toolbox()->linkManager()->loadLinkConfigurationList();
+
+    toolbox()->autoConnectTool()->loadSettings();
+
 
     // Probe for joysticks
     toolbox()->joystickManager()->init();
