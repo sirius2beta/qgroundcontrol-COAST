@@ -127,7 +127,7 @@ void NTRIPTCPLink::_hardwareConnect()
 
 void NTRIPTCPLink::_parse(const QByteArray &buffer)
 {
-    for(const uint8_t& byte : buffer){
+    for(uint8_t byte : buffer){
         if(_state == NTRIPState::waiting_for_rtcm_header){
             if(byte != RTCM3_PREAMBLE)
                 continue;

@@ -72,12 +72,9 @@ public:
     QGCCorePlugin*              corePlugin              () { return _corePlugin; }
     SettingsManager*            settingsManager         () { return _settingsManager; }
     ADSBVehicleManager*         adsbVehicleManager      () { return _adsbVehicleManager; }
-<<<<<<< HEAD
 
     AutoConnectTool*            autoConnectTool         () { return _autoConnectTool;}
-=======
     NTRIP*                      ntrip                   () { return _ntrip; }
->>>>>>> 5b836d8dd2dd50432e8a1be45ae2702e29b45d69
 #if defined(QGC_ENABLE_PAIRING)
     PairingManager*             pairingManager          () { return _pairingManager; }
 #endif

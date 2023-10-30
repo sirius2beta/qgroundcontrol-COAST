@@ -169,13 +169,7 @@ static QObject* screenToolsControllerSingletonFactory(QQmlEngine*, QJSEngine*)
     return screenToolsController;
 }
 
-static QObject* autoConnectToolSingletonFactory(QQmlEngine*, QJSEngine*)
-{
-    // We create this object as a QGCTool even though it isn't in the toolbox
-    AutoConnectTool* _autoConnectTool = new AutoConnectTool(qgcApp(),qgcApp()->toolbox());
 
-    return _autoConnectTool;
-}
 
 static QObject* mavlinkSingletonFactory(QQmlEngine*, QJSEngine*)
 {
