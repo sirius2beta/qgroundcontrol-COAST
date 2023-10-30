@@ -33,6 +33,7 @@
 #include "ADSBVehicleManager.h"
 
 #include "autoconnecttool.h"
+#include "NTRIP.h"
 
 #if defined(QGC_ENABLE_PAIRING)
 #include "PairingManager.h"
@@ -75,8 +76,12 @@ QGCToolbox::QGCToolbox(QGCApplication* app)
     _videoManager           = new VideoManager              (app, this);
     _mavlinkLogManager      = new MAVLinkLogManager         (app, this);
     _adsbVehicleManager     = new ADSBVehicleManager        (app, this);
+<<<<<<< HEAD
 
     _autoConnectTool        = new AutoConnectTool           (app, this);  //Custom class
+=======
+    _ntrip                  = new NTRIP                     (app, this);
+>>>>>>> 5b836d8dd2dd50432e8a1be45ae2702e29b45d69
 #if defined(QGC_ENABLE_PAIRING)
     _pairingManager         = new PairingManager            (app, this);
 #endif
@@ -115,6 +120,7 @@ void QGCToolbox::setChildToolboxes(void)
     _adsbVehicleManager->setToolbox(this);
 
     _autoConnectTool->setToolbox(this);
+    _ntrip->setToolbox(this);
 #if defined(QGC_GST_TAISYNC_ENABLED)
     _taisyncManager->setToolbox(this);
 #endif
