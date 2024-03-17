@@ -8,6 +8,7 @@
 ################################################################################
 DEFINES += DNAPI_QML
 SOURCES += \
+        dnapi/dncore.cpp \
         dnapi/dnqmlglobal.cpp \
         dnapi/dntypes.cpp \
         dnapi/dnqmlobjectlistmodel.cpp \
@@ -19,7 +20,6 @@ SOURCES += \
         dnapi/sensoritem.cpp \
         dnapi/sensormanager.cpp \
         dnapi/dnvideomanager.cpp \
-        dnapi/gpbcore.cpp \
         dnapi/heartbeat.cpp \
         dnapi/networkmanager.cpp \
         dnapi/videoitem_qml.cpp \
@@ -30,6 +30,7 @@ INCLUDEPATH += \
 
 
 HEADERS += \
+    dnapi/dncore.h \
     dnapi/dnqmlglobal.h \
     dnapi/dntypes.h \
     dnapi/dnvideomanager.h \
@@ -41,7 +42,6 @@ HEADERS += \
     dnapi/dnvalue.h \
     dnapi/sensoritem.h \
     dnapi/sensormanager.h \
-    dnapi/gpbcore.h \
     dnapi/heartbeat.h \
     dnapi/networkmanager.h \
     dnapi/videoitem_qml.h \

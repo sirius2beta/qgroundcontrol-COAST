@@ -25,7 +25,7 @@
 #include "HorizontalFactValueGrid.h"
 #include "InstrumentValueData.h"
 
-#include "gpbcore.h"
+#include "dncore.h"
 
 #include <QtQml>
 #include <QQmlEngine>

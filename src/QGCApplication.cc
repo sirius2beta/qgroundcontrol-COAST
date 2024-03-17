@@ -186,7 +186,7 @@ static QObject* DNQmlGlobalSingletonFactory(QQmlEngine*, QJSEngine*)
 {
 
     // We create this object as a QGCTool even though it isn't in the toolbox
-    DNQmlGlobal* qmlGlobal = new DNQmlGlobal(qgcApp(), qgcApp()->gpbCore());
+    DNQmlGlobal* qmlGlobal = new DNQmlGlobal(qgcApp(), qgcApp()->dnCore());
 
     return qmlGlobal;
 }
@@ -202,7 +202,7 @@ QGCApplication::QGCApplication(int &argc, char* argv[], bool unitTesting)
 {
     _app = this;
     _msecsElapsedTime.start();
-    _gpbcore = new GPBCore(this, QString("config1"));
+    _dnCore = new DNCore(this, QString("config1"));
 
 
 #ifdef Q_OS_LINUX
