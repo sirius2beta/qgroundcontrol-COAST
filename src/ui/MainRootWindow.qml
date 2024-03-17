@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  *
  * (c) 2009-2020 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -19,6 +19,9 @@ import QGroundControl.Controls      1.0
 import QGroundControl.ScreenTools   1.0
 import QGroundControl.FlightDisplay 1.0
 import QGroundControl.FlightMap     1.0
+
+import DeNovoViewer 1.0
+import DeNovoViewer.Boat 1.0
 
 /// @brief Native QML top level window
 /// All properties defined here are visible to all QML pages.

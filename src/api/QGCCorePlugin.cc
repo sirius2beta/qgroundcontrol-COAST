@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  *
  * (c) 2009-2020 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -24,6 +24,8 @@
 #include "QGCCameraManager.h"
 #include "HorizontalFactValueGrid.h"
 #include "InstrumentValueData.h"
+
+#include "gpbcore.h"
 
 #include <QtQml>
 #include <QQmlEngine>

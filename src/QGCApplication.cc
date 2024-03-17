@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  *
  * (c) 2009-2020 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -105,6 +105,7 @@
 #include "RemoteIDManager.h"
 #include "CustomAction.h"
 #include "CustomActionManager.h"
+#include "dnqmlglobal.h"
 
 #if defined(QGC_ENABLE_PAIRING)
 #include "PairingManager.h"
@@ -181,6 +182,15 @@ static QObject* qgroundcontrolQmlGlobalSingletonFactory(QQmlEngine*, QJSEngine*)
     return qmlGlobal;
 }
 
+static QObject* DNQmlGlobalSingletonFactory(QQmlEngine*, QJSEngine*)
+{
+
+    // We create this object as a QGCTool even though it isn't in the toolbox
+    DNQmlGlobal* qmlGlobal = new DNQmlGlobal(qgcApp(), qgcApp()->gpbCore());
+
+    return qmlGlobal;
+}
+
 static QObject* shapeFileHelperSingletonFactory(QQmlEngine*, QJSEngine*)
 {
     return new ShapeFileHelper;
@@ -192,6 +202,8 @@ QGCApplication::QGCApplication(int &argc, char* argv[], bool unitTesting)
 {
     _app = this;
     _msecsElapsedTime.start();
+    _gpbcore = new GPBCore(this, QString("config1"));
+
 
 #ifdef Q_OS_LINUX
 #ifndef __mobile__
@@ -534,7 +546,7 @@ void QGCApplication::_initCommon()
 #endif
 
     // Register Qml Singletons
-    qmlRegisterSingletonType<QGroundControlQmlGlobal>   ("QGroundControl",                          1, 0, "QGroundControl",         qgroundcontrolQmlGlobalSingletonFactory);
+    qmlRegisterSingletonType<QGroundControlQmlGlobal>   ("QGroundControl",                          1, 0, "QGroundControl",         qgroundcontrolQmlGlobalSingletonFactory);    
     qmlRegisterSingletonType<ScreenToolsController>     ("QGroundControl.ScreenToolsController",    1, 0, "ScreenToolsController",  screenToolsControllerSingletonFactory);
     qmlRegisterSingletonType<ShapeFileHelper>           ("QGroundControl.ShapeFileHelper",          1, 0, "ShapeFileHelper",        shapeFileHelperSingletonFactory);
     qmlRegisterSingletonType<ShapeFileHelper>           ("MAVLink",                                 1, 0, "MAVLink",                mavlinkSingletonFactory);
@@ -546,6 +558,13 @@ void QGCApplication::_initCommon()
     if(QFontDatabase::addApplicationFont(":/fonts/opensans-demibold") < 0) {
         qWarning() << "Could not load /fonts/opensans-demibold font";
     }
+
+    // Register our Qml objects
+    qmlRegisterUncreatableType<BoatItem>("DeNovoViewer.Boat", 1, 0, "BoatItem",  "reference only");
+    qmlRegisterUncreatableType<BoatManager>("DeNovoViewer.Boat", 1, 0, "BoatManager",  "reference only");
+    // Register Qml Singletons
+    qmlRegisterSingletonType<DNQmlGlobal>   ("DeNovoViewer", 1, 0, "DeNovoViewer", DNQmlGlobalSingletonFactory);
+    qDebug()<<"global init()";
 }
 
 bool QGCApplication::_initForNormalAppBoot()
@@ -596,6 +615,10 @@ bool QGCApplication::_initForNormalAppBoot()
     }
 
     settings.sync();
+
+
+    //*****costum
+
     return true;
 }
 

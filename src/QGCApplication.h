@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  *
  * (c) 2009-2020 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -31,6 +31,7 @@
 #include "UASMessageHandler.h"
 #include "FactSystem.h"
 #include "GPSRTKFactGroup.h"
+#include "gpbcore.h"
 
 #ifdef QGC_RTLAB_ENABLED
 #include "OpalLink.h"
@@ -60,6 +61,7 @@ public:
     QGCApplication(int &argc, char* argv[], bool unitTesting);
     ~QGCApplication();
 
+    GPBCore* gpbCore() { return _gpbcore; }
     /// @brief Sets the persistent flag to delete all settings the next time QGroundControl is started.
     void deleteAllSettingsNextBoot(void);
 
@@ -186,6 +188,7 @@ private slots:
     void _showDelayedAppMessages                    (void);
 
 private:
+    GPBCore* _gpbcore;
     QObject*    _rootQmlObject          ();
     void        _checkForNewVersion     ();
     void        _exitWithError          (QString errorMessage);
